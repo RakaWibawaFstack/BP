@@ -6,7 +6,7 @@ class Transactions extends Model {}
 Transactions.init({
   id: {
     type: DataTypes.UUID,
-    default: DataTypes.UUIDV4,
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true
   },
   status: {
@@ -19,23 +19,26 @@ Transactions.init({
   },
   created_at: {
     type: DataTypes.DATE,
-    default: new Date(),
+    defaultValue: new Date(),
     allowNull: false
   },
   updated_at: {
     type: DataTypes.DATE,
-    default: new Date(),
+    defaultValue: new Date(),
     allowNull: false
   },
   deleted_at: {
     type: DataTypes.DATE,
   }
 }, {
-  modelName: 'transactions',
+  modelName: 'Transactions',
   sequelize: connection,
-  paranoid: true,
+  paranoid: false,
   timestamps: true,
-  underscored: true
+  underscored: true,
+  createdAt: 'created_at',
+  updatedAt: 'updated_at',
+  deletedAt: 'deleted_at'
 })
 
 module.exports = Transactions

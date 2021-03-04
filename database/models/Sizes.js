@@ -6,7 +6,7 @@ class Sizes extends Model {}
 Sizes.init({
   id: {
     type: DataTypes.UUID,
-    default: DataTypes.UUIDV4,
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true
   },
   size: {
@@ -15,12 +15,12 @@ Sizes.init({
   },
   created_at: {
     type: DataTypes.DATE,
-    default: new Date(),
+    defaultValue: new Date(),
     allowNull: false
   },
   updated_at: {
     type: DataTypes.DATE,
-    default: new Date(),
+    defaultValue: new Date(),
     allowNull: false
   },
   deleted_at: {
@@ -29,9 +29,12 @@ Sizes.init({
 }, {
   modelName: 'sizes',
   sequelize: connection,
-  paranoid: true,
+  paranoid: false,
   timestamps: true,
-  underscored: true
+  underscored: true,
+  createdAt: 'created_at',
+  updatedAt: 'updated_at',
+  deletedAt: 'deleted_at'
 })
 
 module.exports = Sizes

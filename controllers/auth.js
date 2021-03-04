@@ -8,7 +8,7 @@ const { SECRET_TOKEN } = process.env;
 
 exports.register = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, full_name, role } = req.body;
 
     const user = await Users.findOne({
       where: {
@@ -27,6 +27,8 @@ exports.register = async (req, res, next) => {
     await Users.create({
       email,
       password: hashedPassword,
+      full_name,
+      role
     });
 
     return res.status(201).json({
@@ -34,18 +36,21 @@ exports.register = async (req, res, next) => {
       code: 201,
       message: "Success register user.",
     });
-  } catch (error) {                                            
+  } catch (error) {        
+    console.log(error)                                    
     return next(error);
   }
 };
 
 exports.login = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, full_name, role } = req.body;
 
     const user = await Users.findOne({
       where: {
         email,
+        full_name,
+        role
       },
     });
 

@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 
 const { SECRET_TOKEN } = process.env
 
-exports.authorization = async (req, res, next) => {
+const authorization = async (req, res, next) => {
   try {
     const authorization = req.header('Authorization')                     
 
@@ -25,7 +25,7 @@ exports.authorization = async (req, res, next) => {
       throw new Error('Invalid token.')
     }
 
-    const user = await User.findByPk(decodedToken.userId)
+    const user = await Users.findByPk(decodedToken.userId)
 
     if (!user) {
       throw new Error('Invalid token.')
@@ -41,3 +41,7 @@ exports.authorization = async (req, res, next) => {
     })
   }
 }
+
+module.exports = {
+  authorization,
+};

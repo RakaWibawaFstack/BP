@@ -27,12 +27,12 @@ Users.init({
   },
   created_at: {
     type: DataTypes.DATE,
-    default: new Date(),
+    defaultValue: new Date(),
     allowNull: false
   },
   updated_at: {
     type: DataTypes.DATE,
-    default: new Date(),
+    defaultValue: new Date(),
     allowNull: false
   },
   deleted_at: {
@@ -41,9 +41,13 @@ Users.init({
 }, {
   modelName: 'Users',
   sequelize: connection,
-  paranoid: true,
+  paranoid: false,
   timestamps: true,
-  underscored: true
+  underscored: true,
+  createdAt: 'created_at',
+  updatedAt: 'updated_at',
+  deletedAt: 'deleted_at'
+
 })
 
 module.exports = Users
