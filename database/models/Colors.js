@@ -9,6 +9,15 @@ Colors.init({
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true
   },
+  product_id: {
+    type: DataTypes.UUID,
+    references: {
+      model: "Products",
+      key: "id",
+    },
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE",
+  },
   color: {
     type: DataTypes.STRING(50),
     allowNull: false

@@ -13,6 +13,8 @@ exports.register = async (req, res, next) => {
     const user = await Users.findOne({
       where: {
         email,
+        full_name,
+        role,
       },
     });
 
@@ -49,15 +51,15 @@ exports.login = async (req, res, next) => {
     const user = await Users.findOne({
       where: {
         email,
-        full_name,
-        role
       },
     });
 
     if (!user) {
-      throw new Error("User with this username not found.");
+      throw new Error("User with this Account or username not found.");
     }
-
+    if(role != user.role){
+      throw new Error("Error, forbidden resource");
+    }
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {

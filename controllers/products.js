@@ -1,4 +1,4 @@
-const { Products, Users, Sizes, Colors } = require('../database/models')
+const { Products, Users, Sizes, Colors, Images } = require('../database/models')
 
 const findAll = async (req, res, next) => {                      
   try {
@@ -158,10 +158,32 @@ const destroy = async (req, res, next) => {
   }
 }
 
+const ListProduct = async (req, res, next) => {
+  try {
+    const product = await Products.findAll({
+      include: [
+        { model: Sizes, as: "sizes", },
+        { model: Colors, as: "colors", },
+        { model: Images, as: "images", },
+      ],
+    });
+    return res.status(200).json({
+      status: "success",
+      code: 200,
+      message: "Success get products. ",
+      data: product,
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+
 module.exports = {
   findAll,
   findById,
   add,
   update,
   destroy,
+  ListProduct
 };

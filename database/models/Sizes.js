@@ -9,6 +9,15 @@ Sizes.init({
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true
   },
+  product_id: {
+    type: DataTypes.UUID,
+    references: {
+      model: "Products",
+      key: "id",
+    },
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE",
+  },
   size: {
     type: DataTypes.STRING(5),
     allowNull: false

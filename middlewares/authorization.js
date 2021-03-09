@@ -2,7 +2,6 @@ require('dotenv').config()
 
 const { Users } = require('../database/models')
 const jwt = require('jsonwebtoken')
-
 const { SECRET_TOKEN } = process.env
 
 const authorization = async (req, res, next) => {

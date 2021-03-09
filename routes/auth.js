@@ -1,6 +1,6 @@
 const { Router } = require('express')
 const { register, login } = require('../controllers/auth')
-
+const { authorization } = require("../middlewares/authorization");
 const router = Router()
 
 router.post('/register', register)

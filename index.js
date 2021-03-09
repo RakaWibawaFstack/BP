@@ -19,7 +19,7 @@ app.use(cors())
 sequelize.authenticate().then(() => {
     console.log(`Success connecting database`)                   
   })
-
+app.use(express.static(__dirname+"public"))
 app.use('/auth', authRouter)
 app.use('/product', productRouter)
 app.use('/color', colorRouter)

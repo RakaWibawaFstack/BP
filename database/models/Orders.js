@@ -9,6 +9,33 @@ Orders.init({
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true
   },
+  product_id: {
+    type: DataTypes.UUID,
+    references: {
+      model: "Products",
+      key: "id",
+    },
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE",
+  },
+  user_id: {
+    type: DataTypes.UUID,
+    references: {
+      model: "Users",
+      key: "id",
+    },
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE",
+  },
+  transaction_id: {
+    type: DataTypes.UUID,
+    references: {
+      model: "Transaction",
+      key: "id",
+    },
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE",
+  },
   product_price: {
     type: DataTypes.INTEGER(50),
     allowNull: false

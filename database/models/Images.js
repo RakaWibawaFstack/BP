@@ -9,6 +9,15 @@ Images.init({
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true
   },
+  product_id: {
+    type: DataTypes.UUID,
+    references: {
+      model: "Products",
+      key: "id",
+    },
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE",
+  },
   url: {
     type: DataTypes.STRING(100),
     allowNull: false

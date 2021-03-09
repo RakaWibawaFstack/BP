@@ -1,26 +1,14 @@
-const { Products, Users, Sizes, Colors } = require('../database/models')
+const { Sizes, Users } = require('../database/models')
 
 const findAll = async (req, res, next) => {                      
   try {
-    const product = await Products.findAll({
-      include:[
-        {
-          model: Colors,
-          as: 'colors'
-        },
-        {
-          model: Sizes,
-          as: 'sizes'
-        }
-      ] 
-      
-    })
+    const sizea = await Sizes.findAll()
 
     return res.status(200).json({
       status: 'success',
       code: 200,
-      message: 'Success get products.',
-      data: product
+      message: 'Success get sizes.',
+      data: size
     })
   } catch (error) {
     return next(error)
@@ -31,17 +19,17 @@ const findById = async (req, res, next) => {
   try {
     const { id } = req.params
 
-    const product = await Products.findByPk(id)
+    const sizea = await Sizes.findByPk(id)
 
-    if (!product) {
-      throw new Error('Products with this id not found.')
+    if (!size) {
+      throw new Error('Sizes with this id not found.')
     }
 
     return res.status(200).json({
       status: 'success',
       code: 200,
-      message: 'Success get products.',
-      data: product
+      message: 'Success get sizes.',
+      data: size
     })
   } catch (error) {
     return next(error)
@@ -51,22 +39,18 @@ const findById = async (req, res, next) => {
 const add = async (req, res, next) => {                             
   try {
     const { user } = req
-    const { name, description, stock, discount, sex, price } = req.body
+    const { product_id, size } = req.body
 
-    const product = await Products.create({
-      name, 
-      description, 
-      stock,
-      discount,
-      sex,
-      price
+    const sizea = await Sizes.create({
+      product_id, 
+      size
     })
 
     return res.status(201).json({
       status: 'success',
       code: 201,
-      message: 'Success create products.',
-      data: product
+      message: 'Success create sizes.',
+      data: size
     })
   } catch (error) {
     return next(error)
@@ -76,34 +60,30 @@ const add = async (req, res, next) => {
 const update = async (req, res, next) => {                          
   try {
     const { user } = req
-    const { id, name, description, stock, discount, sex, price } = req.body
+    const { id, product_id, size } = req.body
 
-    const product = await Products.findByPk(id)
+    const sizea = await Sizes.findByPk(id)
 
-    if (!product) {
-      throw new Error('products with this id not found.')
+    if (!size) {
+      throw new Error('sizes with this id not found.')
     }
 
-    await Products.update({
-      name, 
-      description, 
-      stock,
-      discount,
-      sex,
-      price
+    await Sizes.update({
+      product_id, 
+      size
     }, {
       where: {
         id
       }
     })
 
-    const updatedProduct = await Products.findByPk(id)
+    const updatedSize = await Sizes.findByPk(id)
 
     return res.status(200).json({
       status: 'success',
       code: 200,
-      message: 'Success update products.',
-      data: updatedProduct
+      message: 'Success update sizes.',
+      data: updatedSize
     })
   } catch (error) {
     return next(error)
@@ -114,7 +94,7 @@ const destroy = async (req, res, next) => {
   try {
     const { id } = req.params
 
-    await Products.destroy({
+    await Sizes.destroy({
       where: {
         id
       }
@@ -123,7 +103,7 @@ const destroy = async (req, res, next) => {
     return res.status(200).json({
       status: 'success',
       code: 200,
-      message: 'Success delete products.'
+      message: 'Success delete sizes.'
     })
   } catch (error) {
     console.log(error)
